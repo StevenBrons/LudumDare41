@@ -15,7 +15,7 @@ public class Player extends Object {
 	private BufferedImage texture = Loader.getTexture("player_idle");
 	private Dimension hitbox = new Dimension(50, 100);
 
-	double speed = 5;
+	double speed = 7;
 	double gravity = 5;
 
 	@Override
@@ -28,10 +28,16 @@ public class Player extends Object {
 		}
 		if (UP) {
 			if (onGround) {
-				accy += gravity * 20;
+				accy += gravity * 12;
 			}
 		}
 		accy -= gravity;
+		
+		accx *= 0.4;
+		accy *= 0.9;
+
+		velx *= 0.1;
+		vely *= 0.3;
 	}
 
 	@Override

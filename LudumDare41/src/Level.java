@@ -13,14 +13,23 @@ public class Level {
 
 	public Level() {
 
+		addWalls();
+
 		addObject(new Ground(-50, -150));
 
+		addObject(new Platform(200, 150));
 		addObject(new Platform(600, 150));
-		addObject(new Platform(500, 400));
+		addObject(new Platform(400, 300));
 
 		addObject(new SmallEnemy(50, 50));
+		addObject(new SmallEnemy(800, 50));
 
 		addObject(new Player(0, 50));
+	}
+
+	private void addWalls() {
+		addObject(new Wall(-100, -100));
+		addObject(new Wall(1025, -100));
 	}
 
 	private void addObject(Object object) {

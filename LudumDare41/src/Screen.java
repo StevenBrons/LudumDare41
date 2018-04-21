@@ -31,7 +31,7 @@ public class Screen extends Canvas {
 		drawBackground(g, level);
 
 		g.scale(scale, scale);
-		
+
 		g.translate(-Level.SIZE * Level.ZOOM * (level.player.x / Level.SIZE), 0);
 
 		drawObjects(g, level);
@@ -42,12 +42,14 @@ public class Screen extends Canvas {
 
 	private void drawBackground(Graphics2D g, Level level) {
 		BufferedImage bg = level.getBackground();
-		double f1 = getWidth() / (double) bg.getWidth();
-		double f2 = getHeight() / (double) bg.getHeight();
+		double jumpmax = 0.05;
+		double f1 = (getWidth() / (double) bg.getWidth()) + jumpmax;
+		double f2 = (getHeight() / (double) bg.getHeight()) + jumpmax;
 		double factor = f1 > f2 ? f1 : f2;
+		double jumpeffect = (level.player.y / (Level.SIZE * 1.5));
 		g.drawImage(bg, (int) (getWidth() / 2 - (bg.getWidth() / 2 * factor)),
-				(int) (getHeight() / 2 - (bg.getHeight() / 2 * factor)), (int) (bg.getWidth() * factor),
-				(int) (bg.getHeight() * factor), null);
+				(int) (getHeight() / 2 - (jumpeffect * bg.getHeight() / 2) - (bg.getHeight() / 2 * factor) + (jumpeffect * bg.getHeight())),
+				(int) (bg.getWidth() * factor), (int) (bg.getHeight() * factor), null);
 
 	}
 

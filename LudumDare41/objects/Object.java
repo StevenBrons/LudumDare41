@@ -77,7 +77,7 @@ public class Object {
 
 				if (ix) {
 					hitx = true;
-					if (velx > 0 && !hity) {
+					if (velx > 0) {
 						x = o.x - getHitbox().width;
 					} else {
 						x = o.x + o.getHitbox().width;
@@ -102,12 +102,6 @@ public class Object {
 			vely = 0;
 			accy = 0;
 		}
-
-		accx *= 0.4;
-		accy *= 0.7;
-
-		velx *= 0.1;
-		vely *= 0.3;
 	}
 
 	public Solid getSolidState() {
