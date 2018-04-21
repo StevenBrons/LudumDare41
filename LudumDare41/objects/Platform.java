@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 public class Platform extends Object {
 
 	private static BufferedImage texture = Loader.getTexture("platform1");
-	private static Dimension hitbox = new Dimension(500, 70);
+	private static Dimension hitbox = new Dimension(200, 30);
 
 	public Platform(double x, double y) {
 		this.x = x;

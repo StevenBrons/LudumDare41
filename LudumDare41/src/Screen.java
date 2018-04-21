@@ -2,6 +2,7 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
 public class Screen extends Canvas {
 
@@ -9,6 +10,8 @@ public class Screen extends Canvas {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	public static double scale = 1;
 
 	public Screen() {
 
@@ -23,24 +26,41 @@ public class Screen extends Canvas {
 		Graphics2D g = (Graphics2D) bs.getDrawGraphics();
 		g.clearRect(0, 0, getWidth(), getHeight());
 
-		
+		scale = getWidth() / (double) Level.SIZE;
+
+		drawBackground(g, level);
+
+		g.scale(scale, scale);
+
 		drawObjects(g, level);
 		drawHitbox(g, level);
 
 		bs.show();
 	}
 
+	private void drawBackground(Graphics2D g, Level level) {
+		BufferedImage bg = level.getBackground();
+		double f1 = getWidth() / (double) bg.getWidth();
+		double f2 = getHeight() / (double) bg.getHeight();
+		double factor = f1 > f2 ? f1 : f2;
+		g.drawImage(bg, (int) (getWidth() / 2 - (bg.getWidth() / 2 * factor)),
+				(int) (getHeight() / 2 - (bg.getHeight() / 2 * factor)), (int) (bg.getWidth() * factor),
+				(int) (bg.getHeight() * factor), null);
+
+	}
+
 	private void drawObjects(Graphics2D g, Level level) {
 		for (Object o : level.objects) {
-			g.drawImage(o.getTexture(), (int) o.x, (int) o.y, (int) o.getHitbox().width, (int) o.getHitbox().height,
-					null);
+			g.drawImage(o.getTexture(), (int) o.x, (int) ((getHeight() / scale) - o.y - o.getHitbox().height),
+					(int) o.getHitbox().width, (int) o.getHitbox().height, null);
 		}
 	}
 
 	private void drawHitbox(Graphics2D g, Level level) {
 		for (Object o : level.objects) {
 			g.setColor(Color.RED);
-			g.drawRect((int) o.x, (int) o.y, (int) o.getHitbox().width, (int) o.getHitbox().height);
+			g.drawRect((int) o.x, (int) ((getHeight() / scale) - o.y - o.getHitbox().height), (int) o.getHitbox().width,
+					(int) o.getHitbox().height);
 		}
 	}
 

@@ -6,6 +6,12 @@ import javax.swing.JPanel;
 
 public class Frame extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	
 	JPanel main = new JPanel();
 	Screen screen = new Screen();
 	CardLayout cards = new CardLayout();
