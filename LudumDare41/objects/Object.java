@@ -18,6 +18,11 @@ public class Object {
 
 	boolean onGround = false;
 
+	public Object(double x, double y) {
+		this.x = x;
+		this.y = y;
+	}
+
 	public void show(Graphics2D g) {
 	}
 

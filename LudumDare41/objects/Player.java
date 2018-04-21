@@ -3,6 +3,10 @@ import java.awt.image.BufferedImage;
 
 public class Player extends Object {
 
+	public Player(double x, double y) {
+		super(x, y);
+	}
+
 	public static boolean UP = false;
 	public static boolean DOWN = false;
 	public static boolean LEFT = false;
@@ -13,11 +17,6 @@ public class Player extends Object {
 
 	double speed = 5;
 	double gravity = 5;
-
-	public Player(double x, double y) {
-		this.x = x;
-		this.y = y;
-	}
 
 	@Override
 	public void update(Level level) {

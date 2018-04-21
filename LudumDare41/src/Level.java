@@ -7,16 +7,28 @@ public class Level {
 	private BufferedImage background = Loader.getTexture("background1");
 
 	public static final int SIZE = 1000;
+	public static final double ZOOM = 0.05;
+
+	public Player player;
 
 	public Level() {
-		objects.add(new Platform(0, 0));
-		objects.add(new Platform(200, 0));
-		objects.add(new Platform(400, 0));
-		objects.add(new Platform(600, 150));
-		objects.add(new Platform(500, 400));
 
-		
-		objects.add(new Player(0, 10));
+		addObject(new Ground(-50, -150));
+
+		addObject(new Platform(600, 150));
+		addObject(new Platform(500, 400));
+
+		addObject(new SmallEnemy(50, 50));
+
+		addObject(new Player(0, 50));
+	}
+
+	private void addObject(Object object) {
+		if (object instanceof Player) {
+			player = (Player) object;
+		}
+
+		objects.add(object);
 	}
 
 	public void update() {

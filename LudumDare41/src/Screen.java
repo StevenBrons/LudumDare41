@@ -26,11 +26,13 @@ public class Screen extends Canvas {
 		Graphics2D g = (Graphics2D) bs.getDrawGraphics();
 		g.clearRect(0, 0, getWidth(), getHeight());
 
-		scale = getWidth() / (double) Level.SIZE;
+		scale = (getWidth() / (double) Level.SIZE) + Level.ZOOM;
 
 		drawBackground(g, level);
 
 		g.scale(scale, scale);
+		
+		g.translate(-Level.SIZE * Level.ZOOM * (level.player.x / Level.SIZE), 0);
 
 		drawObjects(g, level);
 		drawHitbox(g, level);
