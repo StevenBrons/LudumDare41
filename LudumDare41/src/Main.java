@@ -37,7 +37,7 @@ public class Main {
 				while (running) {
 					level.update();
 					try {
-						Thread.sleep(100);
+						Thread.sleep(25);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}

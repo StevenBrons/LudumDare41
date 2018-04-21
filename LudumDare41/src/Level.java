@@ -12,7 +12,7 @@ public class Level {
 		objects.add(new Platform(0, 0));
 		objects.add(new Platform(200, 0));
 		objects.add(new Platform(400, 0));
-		objects.add(new Platform(200, 100));
+		objects.add(new Platform(600, 150));
 		objects.add(new Platform(500, 400));
 
 		

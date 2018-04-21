@@ -51,47 +51,66 @@ public class Object {
 		for (Object o : level.objects) {
 			if (!o.equals(this)) {
 				Rectangle2D newPosX = new Rectangle2D.Double(x + velx, y, getHitbox().getWidth(),
-						getHitbox().getHeight());
+						o.getSolidState() == Solid.TOP ? 0.001 : getHitbox().getHeight());
 				boolean ix = intersects(newPosX, o);
 				Rectangle2D newPosY = new Rectangle2D.Double(x, y + vely, getHitbox().getWidth(),
-						getHitbox().getHeight());
+						o.getSolidState() == Solid.TOP ? 0.001 : getHitbox().getHeight());
 				boolean iy = intersects(newPosY, o);
 
-				if (ix) {
-					hitx = true;
-					if (velx > 0) {
-						x = o.x - getHitbox().width;
-					} else {
-						x = o.x + o.getHitbox().width;
-					}
-				}
 				if (iy) {
 					hity = true;
 					if (vely > 0) {
-
+						onGround = false;
+						if (o.getSolidState() != Solid.TOP) {
+							y = o.y - getHitbox().height;
+						}
 					} else {
 						onGround = true;
 						y = o.y + o.getHitbox().height;
 					}
 				}
+
+				if (ix) {
+					hitx = true;
+					if (velx > 0 && !hity) {
+						x = o.x - getHitbox().width;
+					} else {
+						x = o.x + o.getHitbox().width;
+					}
+				}
+
 			}
 		}
 
 		if (!hitx) {
 			x += velx;
+		} else {
+			velx = 0;
+			accx = 0;
 		}
 		if (!hity) {
 			y += vely;
 			if (vely > 0) {
 				onGround = false;
 			}
+		} else {
+			vely = 0;
+			accy = 0;
 		}
 
 		accx *= 0.4;
-		accy *= 0.8;
+		accy *= 0.7;
 
 		velx *= 0.1;
 		vely *= 0.3;
 	}
 
+	public Solid getSolidState() {
+		return Solid.NONE;
+	}
+
+}
+
+enum Solid {
+	FULL, TOP, NONE;
 }

@@ -21,4 +21,8 @@ public class Platform extends Object {
 		return hitbox;
 	}
 	
+	@Override
+	public Solid getSolidState() {
+		return Solid.TOP;
+	}
 }
